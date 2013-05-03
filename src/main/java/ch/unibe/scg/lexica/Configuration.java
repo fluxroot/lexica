@@ -78,7 +78,7 @@ public class Configuration {
 		}
 
 		// Get the file pattern
-		filePattern = filePatternArg.value(options);
+		filePattern = filePatternArg.value(options).replaceAll("[\\\"]", "");
 	}
 
 }
