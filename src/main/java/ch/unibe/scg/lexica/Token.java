@@ -11,7 +11,7 @@ public class Token {
 	private final String name;
 	
 	private int globalCount = 0;
-	private float fileCount = 0;
+	private float averageFileCount = 0;
 	private int currentFileCount = 0;
 	
 	private final List<String> prevTokens = new ArrayList<>();
@@ -28,8 +28,8 @@ public class Token {
 		return globalCount;
 	}
 	
-	public float getFileCount() {
-		return fileCount;
+	public float getAverageFileCount() {
+		return averageFileCount;
 	}
 	
 	public List<String> getPrevTokens() {
@@ -45,7 +45,7 @@ public class Token {
 	}
 	
 	public void resetFileCount() {
-		fileCount = (fileCount + currentFileCount) / 2;
+		averageFileCount = (averageFileCount + currentFileCount) / 2;
 		currentFileCount = 0;
 	}
 
