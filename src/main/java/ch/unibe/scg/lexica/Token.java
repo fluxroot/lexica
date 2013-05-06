@@ -11,6 +11,7 @@ public class Token {
 	private final String name;
 	
 	private int globalCount = 0;
+	private int fileCount = 0;
 	private float averageFileCount = 0;
 	private int currentFileCount = 0;
 	
@@ -26,6 +27,10 @@ public class Token {
 	
 	public int getGlobalCount() {
 		return globalCount;
+	}
+	
+	public int getFileCount() {
+		return fileCount;
 	}
 	
 	public float getAverageFileCount() {
@@ -45,6 +50,10 @@ public class Token {
 	}
 	
 	public void resetFileCount() {
+		if (currentFileCount > 0) {
+			++fileCount;
+		}
+		
 		averageFileCount = (averageFileCount + currentFileCount) / 2;
 		currentFileCount = 0;
 	}

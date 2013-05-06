@@ -77,7 +77,7 @@ public class Graph {
 	public void print() {
 		for (Entry<String, Token> entry : tokenTable.entrySet()) {
 			System.out.print(entry.getKey() + ";");
-			System.out.format("%d;%.2f%n", entry.getValue().getGlobalCount(), entry.getValue().getAverageFileCount());
+			System.out.format("%d;%.2f;%d%n", entry.getValue().getGlobalCount(), entry.getValue().getAverageFileCount(), entry.getValue().getFileCount());
 		}
 	}
 
