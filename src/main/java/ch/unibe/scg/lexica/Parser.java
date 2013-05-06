@@ -39,7 +39,7 @@ public class Parser {
 					// Ignore white spaces
 					prevName = add(name, prevName);
 					name = "";
-				} else if (Character.toString(c).matches("[\\\"\\'\\|\\\\\\&\\$\\%\\#\\@\\.\\,\\;\\:\\!\\?\\+\\-\\*\\/\\=\\<\\>\\(\\)\\{\\}\\[\\]]")) {
+				} else if (Character.toString(c).matches("[\\\"\\'\\`\\^\\|\\~\\\\\\&\\$\\%\\#\\@\\.\\,\\;\\:\\!\\?\\+\\-\\*\\/\\=\\<\\>\\(\\)\\{\\}\\[\\]]")) {
 					// Ignore delimiters
 					prevName = add(name, prevName);
 					name = "";
