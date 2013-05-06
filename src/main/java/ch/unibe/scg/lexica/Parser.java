@@ -40,9 +40,8 @@ public class Parser {
 					prevName = add(name, prevName);
 					name = "";
 				} else if (Character.toString(c).matches("[\\\"\\'\\|\\\\\\&\\$\\%\\#\\@\\.\\,\\;\\:\\!\\?\\+\\-\\*\\/\\=\\<\\>\\(\\)\\{\\}\\[\\]]")) {
-					// Delimiter
+					// Ignore delimiters
 					prevName = add(name, prevName);
-					prevName = add(Character.toString(c), prevName);
 					name = "";
 				} else {
 					// Add character to token
