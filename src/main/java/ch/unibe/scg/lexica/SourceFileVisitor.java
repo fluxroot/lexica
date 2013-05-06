@@ -43,12 +43,8 @@ public class SourceFileVisitor extends SimpleFileVisitor<Path> {
 
 			graph.newFile();
 
-			if (!graph.exists(file)) {
-				Parser parser = new Parser(graph, Files.newBufferedReader(file, Charset.defaultCharset()));
-				parser.parse();
-				
-				graph.logFile(file);
-			}
+			Parser parser = new Parser(graph, Files.newBufferedReader(file, Charset.defaultCharset()));
+			parser.parse();
 		}
 
 		return FileVisitResult.CONTINUE;

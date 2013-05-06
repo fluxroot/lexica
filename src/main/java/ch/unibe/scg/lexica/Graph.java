@@ -3,8 +3,6 @@
 */
 package ch.unibe.scg.lexica;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Hashtable;
 import java.util.Map.Entry;
@@ -19,7 +17,6 @@ public class Graph {
 
 	private final Path path;
 	private final Hashtable<String, Token> tokenTable = new Hashtable<>();
-	private final Hashtable<String, FileInfo> fileTable = new Hashtable<>();
 	
 	public Graph(Path path) {
 		Objects.requireNonNull(path);
@@ -31,13 +28,6 @@ public class Graph {
 		for (Token token : tokenTable.values()) {
 			token.resetFileCount();
 		}
-	}
-
-	public void logFile(Path file) throws IOException {
-		Objects.requireNonNull(file);
-		
-		FileInfo fileInfo = new FileInfo(Files.size(file), Files.getLastModifiedTime(file));
-		fileTable.put(file.toString(), fileInfo);
 	}
 
 	public void put(String name, String prev) {
@@ -61,19 +51,6 @@ public class Graph {
 		token.incrementFileCount();
 	}
 
-	public boolean exists(Path file) throws IOException {
-		Objects.requireNonNull(file);
-		
-		FileInfo fileInfo = fileTable.get(file.toString());
-		if (fileInfo != null
-				&& Files.size(file) == fileInfo.getSize()
-				&& Files.getLastModifiedTime(file).equals(fileInfo.getFileTime())) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 	public void print() {
 		for (Entry<String, Token> entry : tokenTable.entrySet()) {
 			System.out.print(entry.getKey() + ";");
