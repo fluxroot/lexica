@@ -28,7 +28,7 @@ public class ScanMode implements IOperationMode {
 	public void execute() {
 		logger.info("Scanning " + path.toString() + " with file pattern " + Configuration.getInstance().filePattern);
 		
-		try (Graph graph = new Graph(path)) {
+		try (Graph graph = new Graph(path, true)) {
 			Files.walkFileTree(path, new SourceFileVisitor(graph));
 			graph.print();
 		} catch (IOException | ClassNotFoundException | SQLException e) {

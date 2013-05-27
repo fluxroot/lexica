@@ -6,6 +6,7 @@ package ch.unibe.scg.lexica;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.UnmappableCharacterException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 import org.slf4j.Logger;
@@ -50,12 +51,12 @@ public class Parser {
 			}
 			
 			prevName = add(name, prevName);
-		} catch (UnmappableCharacterException e) {
+		} catch (UnmappableCharacterException | SQLException e) {
 			logger.warn("An error occured", e);
 		}
 	}
 	
-	private String add(String name, String prev) {
+	private String add(String name, String prev) throws SQLException {
 		if (!name.isEmpty()) {
 			graph.put(name, prev);
 		}

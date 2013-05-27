@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.sql.SQLException;
 import java.util.Objects;
 
 import org.slf4j.Logger;
@@ -41,7 +42,13 @@ public class SourceFileVisitor extends SimpleFileVisitor<Path> {
 		if (name != null && pathMatcher.matches(name)) {
 			logger.debug("Parsing " + file.toString());
 
-			graph.newFile();
+			try {
+				graph.newFile();
+			} catch (SQLException e) {
+				logger.error("An error occured", e);
+
+				return FileVisitResult.TERMINATE;
+			}
 
 			Parser parser = new Parser(graph, Files.newBufferedReader(file, Charset.defaultCharset()));
 			parser.parse();
