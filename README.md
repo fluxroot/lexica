@@ -55,7 +55,7 @@ You can specify a path where the source code can be found. It will scan
 this directory recursively. If you do not specify a path, it will scan
 the current directory.
 
-Example: `java -jar lexica.jar scan /location/to/my/source/code`  
+    Example: `java -jar lexica.jar scan /location/to/my/source/code`  
 Scans every file under the directory /location/to/my/source/code.
 
 - `-f <file pattern>`  
@@ -66,10 +66,10 @@ will be passed to FileSystem.getPathMatcher(). Have a look at the
 Javadoc if you want to know a little bit more about the syntax. If you
 do not specify a file pattern, it will scan every file.
 
-Example: `java -jar lexica.jar scan -f "*.java"`  
+    Example: `java -jar lexica.jar scan -f "*.java"`  
 Scans all files ending in "*.java" under the current directory.
 
-Example: `java -jar lexica.jar scan -f "*.{c,h}"`  
+    Example: `java -jar lexica.jar scan -f "*.{c,h}"`  
 Scans all files ending in either "*.c" or "*.h" under the current directory.
 
 ### Use the database
