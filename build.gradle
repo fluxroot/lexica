@@ -43,9 +43,9 @@ configure(rootProject) {
 			configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
 		}
 		from sourceSets.main.allJava
-	    manifest {
-	        attributes 'Implementation-Title': 'ch.unibe.scg.lexica', 'Implementation-Version': version, 'Main-Class': 'ch.unibe.scg.lexica.Lexica'
-	    }
+		manifest {
+			attributes 'Implementation-Title': project.group, 'Implementation-Version': project.version, 'Main-Class': 'ch.unibe.scg.lexica.Lexica'
+		}
 	}
 	
 	task dist(type: Zip) {
