@@ -2,15 +2,15 @@ Lexica
 ======
 
 Copyright 2013 Software Composition Group, University of Bern.
-All rights reserved.
+All rights reserved.  
 https://github.com/fluxroot/lexica
 
 
 Introduction
 ------------
 Lexica is a keyword analyzer for programming languages. It tries to find
-keywords of unknown programming languages from source code files by
-using heuristics.
+keywords of unknown programming languages from source code by using
+heuristics.
 
 
 System Requirements
@@ -27,49 +27,49 @@ build system. So building the jar file is really straightforward.
 
 To build it from source, use the following steps.
 
-- get it
+- get it  
 `git clone https://github.com/fluxroot/lexica.git`
 
-- build it
+- build it  
 `./gradlew build`
 
-- grab it
+- grab it  
 `cp build/distributions/lexica-$version$.zip <installation directory>`
 
-- install it
+- install it  
 Use your favorite unzip tool. There is no need to do any system-wide
 installation. You can run it directly from the extracted directory.
 
 
 Usage
 -----
-Lexica can be run from the commandline to scan a directory for source
-code files. It will create a [H2] database in the given directory. This
-database can be used to do some further analysis on the data.
+Lexica can be run directly from the command line. It will create a [H2]
+database in the given directory. This database can be used to do some
+further analysis on the data.
 
 ### Scan the source code
-java -jar lexica.jar scan [path] [-f <file pattern>]
+`java -jar lexica.jar scan [path] [-f <file pattern>]`
 
-- path
-You can specify a path where all the source code files can be found. It
-will scan this directory recursively. If you do not specify a path, it
-will scan the current directory.
+- `path`  
+You can specify a path where the source code can be found. It will scan
+this directory recursively. If you do not specify a path, it will scan
+the current directory.
 
-Example: java -jar lexica.jar scan /location/to/my/source/code
+Example: `java -jar lexica.jar scan /location/to/my/source/code`  
 Scans every file under the directory /location/to/my/source/code.
 
-- -f <file pattern>
-You can specify a file pattern to be used for matching the source code
-filenames. Normally you really want to do this, because software
-projects tend to have other files than source code files lying around.
-The file pattern will be passed to FileSystem.getPathMatcher(). Have a
-look at the Javadoc if you want to know a little bit more about the
-syntax. If you do not specify a file pattern, it will scan every file.
+- `-f <file pattern>`  
+You can specify a file pattern to be used for matching the filenames.
+Normally you really want to do this, because software projects tend to
+have other files than source code files lying around. The file pattern
+will be passed to FileSystem.getPathMatcher(). Have a look at the
+Javadoc if you want to know a little bit more about the syntax. If you
+do not specify a file pattern, it will scan every file.
 
-Example: java -jar lexica.jar scan -f "*.java"
+Example: `java -jar lexica.jar scan -f "*.java"`  
 Scans all files ending in "*.java" under the current directory.
 
-Example: java -jar lexica.jar scan -f "*.{c,h}"
+Example: `java -jar lexica.jar scan -f "*.{c,h}"`  
 Scans all files ending in either "*.c" or "*.h" under the current directory.
 
 ### Use the database
