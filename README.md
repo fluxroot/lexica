@@ -1,6 +1,8 @@
 Lexica
 ======
 
+[![Build Status](https://travis-ci.org/fluxroot/lexica.png)](https://travis-ci.org/fluxroot/lexica)
+
 Copyright 2013 Software Composition Group, University of Bern.
 All rights reserved.  
 https://github.com/fluxroot/lexica
