@@ -7,8 +7,8 @@ import org.junit.Test;
 
 public class LexicaTest {
 
-	@Test
-	public void test() {
-	}
+    @Test
+    public void test() {
+    }
 
 }

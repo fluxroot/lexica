@@ -9,23 +9,23 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AnalyzeMode implements IOperationMode {
+public final class AnalyzeMode implements IOperationMode {
 
-	private static final Logger logger = LoggerFactory.getLogger(AnalyzeMode.class);
+    private static final Logger logger = LoggerFactory.getLogger(AnalyzeMode.class);
 
-	private final Path path;
+    private final Path path;
 
-	public AnalyzeMode(Path path) {
-		Objects.requireNonNull(path);
-		
-		this.path = path;
-	}
+    public AnalyzeMode(Path path) {
+        Objects.requireNonNull(path);
 
-	@Override
-	public void execute() {
-		logger.info("Analyzing " + path);
-		
-		// TODO
-	}
+        this.path = path;
+    }
+
+    @Override
+    public void execute() {
+        logger.info("Analyzing " + path);
+
+        // TODO
+    }
 
 }
