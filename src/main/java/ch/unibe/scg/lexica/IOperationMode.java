@@ -5,6 +5,6 @@ package ch.unibe.scg.lexica;
 
 public interface IOperationMode {
 
-	public void execute();
+    public void execute();
 
 }

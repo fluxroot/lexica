@@ -14,26 +14,26 @@ import org.slf4j.LoggerFactory;
 
 public class ScanMode implements IOperationMode {
 
-	private static final Logger logger = LoggerFactory.getLogger(ScanMode.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScanMode.class);
 
-	private final Path path;
+    private final Path path;
 
-	public ScanMode(Path path) {
-		Objects.requireNonNull(path);
+    public ScanMode(Path path) {
+        Objects.requireNonNull(path);
 
-		this.path = path;
-	}
+        this.path = path;
+    }
 
-	@Override
-	public void execute() {
-		logger.info("Scanning " + path.toString() + " with file pattern " + Configuration.getInstance().filePattern);
+    @Override
+    public void execute() {
+        logger.info("Scanning " + path.toString() + " with file pattern " + Configuration.getInstance().filePattern);
 
-		try (Graph graph = new Graph(path, true)) {
-			Files.walkFileTree(path, new SourceFileVisitor(graph));
-			graph.print();
-		} catch (IOException | ClassNotFoundException | SQLException e) {
-			logger.error("Cannot walk the file tree", e);
-		}
-	}
+        try (Graph graph = new Graph(path, true)) {
+            Files.walkFileTree(path, new SourceFileVisitor(graph));
+            graph.print();
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            logger.error("Cannot walk the file tree", e);
+        }
+    }
 
 }

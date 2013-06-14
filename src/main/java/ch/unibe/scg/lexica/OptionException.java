@@ -5,13 +5,13 @@ package ch.unibe.scg.lexica;
 
 public class OptionException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public OptionException() {
-	}
+    public OptionException() {
+    }
 
-	public OptionException(String message) {
-		super(message);
-	}
+    public OptionException(String message) {
+        super(message);
+    }
 
 }

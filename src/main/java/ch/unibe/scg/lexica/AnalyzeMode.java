@@ -11,21 +11,21 @@ import org.slf4j.LoggerFactory;
 
 public class AnalyzeMode implements IOperationMode {
 
-	private static final Logger logger = LoggerFactory.getLogger(AnalyzeMode.class);
+    private static final Logger logger = LoggerFactory.getLogger(AnalyzeMode.class);
 
-	private final Path path;
+    private final Path path;
 
-	public AnalyzeMode(Path path) {
-		Objects.requireNonNull(path);
+    public AnalyzeMode(Path path) {
+        Objects.requireNonNull(path);
 
-		this.path = path;
-	}
+        this.path = path;
+    }
 
-	@Override
-	public void execute() {
-		logger.info("Analyzing " + path);
+    @Override
+    public void execute() {
+        logger.info("Analyzing " + path);
 
-		// TODO
-	}
+        // TODO
+    }
 
 }

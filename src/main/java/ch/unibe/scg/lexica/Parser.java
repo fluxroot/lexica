@@ -14,54 +14,54 @@ import org.slf4j.LoggerFactory;
 
 public class Parser {
 
-	private static final Logger logger = LoggerFactory.getLogger(Parser.class);
+    private static final Logger logger = LoggerFactory.getLogger(Parser.class);
 
-	private final Graph graph;
-	private final BufferedReader reader;
+    private final Graph graph;
+    private final BufferedReader reader;
 
-	public Parser(Graph graph, BufferedReader reader) {
-		Objects.requireNonNull(graph);
-		Objects.requireNonNull(reader);
+    public Parser(Graph graph, BufferedReader reader) {
+        Objects.requireNonNull(graph);
+        Objects.requireNonNull(reader);
 
-		this.graph = graph;
-		this.reader = reader;
-	}
+        this.graph = graph;
+        this.reader = reader;
+    }
 
-	public void parse() throws IOException {
-		String prevName = null;
-		String name = "";
+    public void parse() throws IOException {
+        String prevName = null;
+        String name = "";
 
-		int i = 0;
-		try {
-			while ((i = reader.read()) != -1) {
-				char c = (char) i;
+        int i = 0;
+        try {
+            while ((i = reader.read()) != -1) {
+                char c = (char) i;
 
-				if (Character.toString(c).matches("[ \\r\\n\\t]")) {
-					// Ignore white spaces
-					prevName = add(name, prevName);
-					name = "";
-				} else if (Character.toString(c).matches("[\\\"\\'\\`\\^\\|\\~\\\\\\&\\$\\%\\#\\@\\.\\,\\;\\:\\!\\?\\+\\-\\*\\/\\=\\<\\>\\(\\)\\{\\}\\[\\]]")) {
-					// Ignore delimiters
-					prevName = add(name, prevName);
-					name = "";
-				} else {
-					// Add character to token
-					name += c;
-				}
-			}
+                if (Character.toString(c).matches("[ \\r\\n\\t]")) {
+                    // Ignore white spaces
+                    prevName = add(name, prevName);
+                    name = "";
+                } else if (Character.toString(c).matches("[\\\"\\'\\`\\^\\|\\~\\\\\\&\\$\\%\\#\\@\\.\\,\\;\\:\\!\\?\\+\\-\\*\\/\\=\\<\\>\\(\\)\\{\\}\\[\\]]")) {
+                    // Ignore delimiters
+                    prevName = add(name, prevName);
+                    name = "";
+                } else {
+                    // Add character to token
+                    name += c;
+                }
+            }
 
-			prevName = add(name, prevName);
-		} catch (UnmappableCharacterException | SQLException e) {
-			logger.warn("An error occured", e);
-		}
-	}
+            prevName = add(name, prevName);
+        } catch (UnmappableCharacterException | SQLException e) {
+            logger.warn("An error occured", e);
+        }
+    }
 
-	private String add(String name, String prev) throws SQLException {
-		if (!name.isEmpty()) {
-			graph.put(name, prev);
-		}
+    private String add(String name, String prev) throws SQLException {
+        if (!name.isEmpty()) {
+            graph.put(name, prev);
+        }
 
-		return prev;
-	}
+        return prev;
+    }
 
 }
