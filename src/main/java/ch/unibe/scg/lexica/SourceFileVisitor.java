@@ -27,17 +27,17 @@ public class SourceFileVisitor extends SimpleFileVisitor<Path> {
 
 	public SourceFileVisitor(Graph graph) {
 		Objects.requireNonNull(graph);
-		
+
 		this.graph = graph;
-		
+
 		pathMatcher = FileSystems.getDefault().getPathMatcher("glob:" + Configuration.getInstance().filePattern);
 	}
-	
+
 	@Override
 	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 		Objects.requireNonNull(file);
 		Objects.requireNonNull(attrs);
-		
+
 		Path name = file.getFileName();
 		if (name != null && pathMatcher.matches(name)) {
 			logger.debug("Parsing " + file.toString());

@@ -17,14 +17,14 @@ public class AnalyzeMode implements IOperationMode {
 
 	public AnalyzeMode(Path path) {
 		Objects.requireNonNull(path);
-		
+
 		this.path = path;
 	}
 
 	@Override
 	public void execute() {
 		logger.info("Analyzing " + path);
-		
+
 		// TODO
 	}
 
