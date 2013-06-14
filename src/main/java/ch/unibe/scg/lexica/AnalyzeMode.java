@@ -9,7 +9,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AnalyzeMode implements IOperationMode {
+public final class AnalyzeMode implements IOperationMode {
 
     private static final Logger logger = LoggerFactory.getLogger(AnalyzeMode.class);
 

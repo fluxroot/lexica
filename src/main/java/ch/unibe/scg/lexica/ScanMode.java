@@ -12,7 +12,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ScanMode implements IOperationMode {
+public final class ScanMode implements IOperationMode {
 
     private static final Logger logger = LoggerFactory.getLogger(ScanMode.class);
 
@@ -26,7 +26,7 @@ public class ScanMode implements IOperationMode {
 
     @Override
     public void execute() {
-        logger.info("Scanning " + path.toString() + " with file pattern " + Configuration.getInstance().filePattern);
+        logger.info("Scanning " + path.toString() + " with file pattern " + Configuration.getInstance().getFilePattern());
 
         try (Graph graph = new Graph(path, true)) {
             Files.walkFileTree(path, new SourceFileVisitor(graph));

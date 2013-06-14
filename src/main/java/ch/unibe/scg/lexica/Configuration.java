@@ -14,12 +14,12 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 
-public class Configuration {
+public final class Configuration {
 
     private static final Configuration instance = new Configuration();
 
-    public IOperationMode mode = null;
-    public String filePattern = null;
+    private IOperationMode mode = null;
+    private String filePattern = null;
 
     private Configuration() {
     }
@@ -28,8 +28,16 @@ public class Configuration {
         return instance;
     }
 
+    public IOperationMode getMode() {
+        return mode;
+    }
+
+    public String getFilePattern() {
+        return filePattern;
+    }
+
     /**
-     * Parse the arguments in the form:
+     * Parse the arguments.
      *
      * <scan|analyze> [path] [-f <file pattern>]
      *

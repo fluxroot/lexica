@@ -30,7 +30,7 @@ public class SourceFileVisitor extends SimpleFileVisitor<Path> {
 
         this.graph = graph;
 
-        pathMatcher = FileSystems.getDefault().getPathMatcher("glob:" + Configuration.getInstance().filePattern);
+        pathMatcher = FileSystems.getDefault().getPathMatcher("glob:" + Configuration.getInstance().getFilePattern());
     }
 
     @Override
