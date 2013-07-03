@@ -1,94 +1,99 @@
-allprojects {
-	apply plugin: 'base'
-	
-	group = 'ch.unibe.scg.lexica'
-	
-	repositories {
-		mavenCentral()
-	}
+apply plugin: 'java'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
 
-	configurations {
-		eclipselibs {
-			extendsFrom compile
-		}
-	}
+description = 'Lexical Analyzer'
 
-	task libs(type: Sync) {
-		from configurations.eclipselibs
-		into "$projectDir/lib"
-	}
+group = 'ch.unibe.scg.lexica'
 
-	tasks.withType(Pmd) {
-		pmd {
-			ignoreFailures = true
-		}
-	}
-
-	tasks.withType(FindBugs) {
-		findbugs {
-			ignoreFailures = true
-		}
-	}
-
-	tasks.withType(Checkstyle) {
-		checkstyle {
-			ignoreFailures = true
-		}
-	}
+if (!hasProperty('buildNumber')) {
+    ext.buildNumber = 'dev'
+}
+if (version.contains('-')) {
+    if (hasProperty('branchName') && branchName == 'master') {
+        version += '.' + buildNumber
+    } else {
+        version += '.0'
+    }
 }
 
-configure(rootProject) {
-	apply plugin: 'java'
-	apply plugin: 'pmd'
-	apply plugin: 'findbugs'
-	apply plugin: 'checkstyle'
-	
-	description = 'Lexical Analyzer'
-	
-	sourceCompatibility = 1.7
-	targetCompatibility = 1.7
-	
-	dependencies {
-		compile 'org.slf4j:slf4j-api:1.7.+'
-		compile 'org.slf4j:slf4j-log4j12:1.7.+'
-		compile 'log4j:log4j:1.2.+'
-		compile 'net.sf.jopt-simple:jopt-simple:4.3'
-		
-		compile 'com.h2database:h2:1.3.+'
-		
-		testCompile 'junit:junit:4.+'
-	}
-	
-	jar {
-		from {
-			configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
-		}
-		from sourceSets.main.allJava
-		manifest {
-			attributes 'Implementation-Title': project.group, 'Implementation-Version': project.version, 'Main-Class': 'ch.unibe.scg.lexica.Lexica'
-		}
-	}
-	
-	task dist(type: Zip) {
-		def baseDir = "${project.name}-${project.version}"
-		
-		into ("$baseDir") {
-			from 'README.md'
-			from jar
-		}
-	}
-
-	artifacts {
-		archives dist
-	}
-	
-	task wrapper(type: Wrapper) {
-		gradleVersion = '1.5'
-	}
+if (!hasProperty('revisionNumber')) {
+    ext.revisionNumber = 'rev'
+}
+if (version.contains('-') && !(hasProperty('branchName') && branchName == 'master')) {
+    version += '+' + revisionNumber
 }
 
-def downloadFile(srcUrl, destUrl) {
-	def dest = new BufferedOutputStream(new FileOutputStream(destUrl))
-	dest << new URL(srcUrl).openStream()
-	dest.close()
+println "Building version ${version}"
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    eclipselibs {
+        extendsFrom compile
+    }
+}
+
+task libs(type: Sync) {
+    from configurations.eclipselibs
+    into "$projectDir/lib"
+}
+
+tasks.withType(Pmd) {
+    pmd {
+        ignoreFailures = true
+    }
+}
+
+tasks.withType(FindBugs) {
+    findbugs {
+        ignoreFailures = true
+    }
+}
+
+tasks.withType(Checkstyle) {
+    checkstyle {
+        ignoreFailures = true
+        showViolations = false
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.+'
+    compile 'org.slf4j:slf4j-log4j12:1.7.+'
+    compile 'log4j:log4j:1.2.+'
+    compile 'net.sf.jopt-simple:jopt-simple:4.3'
+
+    compile 'com.h2database:h2:1.3.+'
+
+    testCompile 'junit:junit:4.+'
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+jar {
+    from {
+        configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
+    }
+    from sourceSets.main.allJava
+    manifest {
+        attributes 'Implementation-Title': project.group, 'Implementation-Version': project.version, 'Main-Class': 'ch.unibe.scg.lexica.Lexica'
+    }
+}
+
+task dist(type: Zip) {
+    def baseDir = "${project.name}-${project.version}"
+
+    into ("$baseDir") {
+        from 'README.md'
+        from jar
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
 }
