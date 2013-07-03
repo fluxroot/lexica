@@ -13,3 +13,9 @@ run/
 .settings/
 bin/
 .classpath
+.project
+
+# IntelliJ IDEA
+.idea/
+out/
+*.iml
