@@ -81,7 +81,7 @@ jar {
     }
     from sourceSets.main.allJava
     manifest {
-        attributes 'Implementation-Title': project.group, 'Implementation-Version': project.version, 'Main-Class': 'ch.unibe.scg.lexica.Lexica'
+        attributes 'Implementation-Title': project.name, 'Implementation-Version': project.version, 'Main-Class': 'ch.unibe.scg.lexica.Lexica'
     }
 }
 
